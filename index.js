@@ -1,9 +1,6 @@
 'use strict';
 
 const queryString = require('query-string');
-// On IOS, scrollTop doesn't return the correct value.
-const windowScrolltop = window.pageYOffset || document.documentElement.scrollTop;
-
 
 /**
  * Simulate basic Jquery selector usage without having to rely on jquery.
@@ -108,9 +105,13 @@ class Tabs {
         tabElement ? tabElement : this.activeTabElement();
         // In tab mode, focus is not desirable for non-touch devices.
         if ((tabElement.getAttribute('type') === 'radio') && !(this.isIos || this.isAndroid)) return;
-        let scrollTop = windowScrolltop + tabElement.nextElementSibling.getBoundingClientRect().top;
         // Give the browser some space to figure out the correct scroll height.
-        setTimeout(function() {window.scrollTo(0, scrollTop);}, 0);
+        setTimeout(function() {
+            // On IOS, scrollTop doesn't return the correct value.
+            let windowScrolltop = window.pageYOffset || document.documentElement.scrollTop;
+            let scrollTop = windowScrolltop + tabElement.nextElementSibling.getBoundingClientRect().top;
+            window.scrollTo(0, scrollTop);
+        }, 0);
     }
 
 
@@ -125,6 +126,11 @@ class Tabs {
             tabSelector.setAttribute('type', mediaQueryList.matches ? 'checkbox' : 'radio');
         });
         let tabElement = this.activate();
+        if(mediaQueryList.matches) {
+            this.container.className = this.container.className + ' accordion';
+        } else {
+            this.container.className = this.container.className.replace(' accordion', '');
+        }
         this.focus(tabElement);
     }
 }

@@ -35,7 +35,7 @@
             margin-bottom: 0;
 
             color: @textColor;
-            font-size: 1em;
+            font-size: 1rem;
             .no-select();
             outline: 0;
             font-size: 13px;
@@ -90,15 +90,8 @@
         }
     }
 
-    &.accordions {
-
-    }
-}
-
-
-/** Accordion mode */
-@media screen and (max-width : 480px) {
-    .tabcordions {
+    /** Accordion-specific styling */
+    &.accordion {
         .tabcordion {
             padding: 0px;
 
@@ -116,6 +109,7 @@
                     display: inline-block;
                     speak: none;
                     float: right;
+                    font-size: 16px;
                 }
             }
 
@@ -126,7 +120,7 @@
                     color: @spotcolor;
 
                     &:after {
-                        content: "\25b4";
+                        content: "\25b4";                        
                     }
 
                     &:hover {
