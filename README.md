@@ -3,6 +3,7 @@ A multi-tab plugin with minimal dependencies.
 On small devices it switches to accordion mode. Loaded as Jquery plugin, if Jquery
 is included.
 
+
 ## Why?
 * Minimal dependencies: 2.6kb minified/gzipped (including [query-string](https://www.npmjs.com/package/query-string))
 * Integrates well with npm/browserify
@@ -28,17 +29,16 @@ is included.
     # In your project files, include the plugin. Make sure you have Babel and
     # Browserify in your (gulp) build workflow. See example/index.html for
     # the required html layout.
-    const Tabs = require('tabcordions');
+    const Tabcordions = require('tabcordions');
 
     window.onload = function() {
         # Without jquery
         document.querySelectorAll('.tabs').forEach(function(tabElement, i) {
-            new Tabs({container: tabElement, tabsindex: i});
+            new Tabcordions({container: tabElement, tabsindex: i});
         });
         # With jquery
-        $('.tabs').tabs();
+        $('.tabs').tabcordions();
     }
-
 
 
 ## Options
@@ -46,5 +46,6 @@ is included.
 * breakpoint {Number} - The screen width at which tabcordions switch between accordions and tabs.
 * tabsindex {String} - Used to keep track of tabs state.
 
+
 ## Bugs?
-File an issue and we will look into it!
+[File an issue](https://github.com/wearespindle/tabcordions/issues/new) and we will look into it!

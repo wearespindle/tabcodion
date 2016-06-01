@@ -1,7 +1,7 @@
-const Tabs = require('../index');
+const Tabcordions = require('../index');
 
 window.onload = function() {
-    document.querySelectorAll('.tabs').forEach(function(tabElement, i) {
-        new Tabs({container: tabElement, tabsindex: i});
+    document.querySelectorAll('.tabcordions').forEach(function(tabElement, i) {
+        new Tabcordions({container: tabElement, tabsindex: i});
     });
 }

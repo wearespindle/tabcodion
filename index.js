@@ -28,7 +28,7 @@ class Tabs {
     constructor({container, breakpoint = 480, tabsindex = 0} = {}) {
         this.container = container;
         this.mediaQueryList = window.matchMedia('(max-width: ' + breakpoint + 'px)');
-        this.tabsindex = `tabs-${tabsindex}`;
+        this.tabsindex = `tc${tabsindex}`;
 
         this.isIos = navigator.userAgent.match(/(iPod|iPhone|iPad)/) ? true : false;
         this.isAndroid = navigator.userAgent.match(/(Android)/) ? true : false;
@@ -38,7 +38,7 @@ class Tabs {
 
         // Listen for mediaquery changes and switch mode if necessary.
         this.mediaQueryList.addListener(this.tabMode.bind(this));
-        _$(this.container, '.tab-selector').forEach((tabSelector) => {
+        _$(this.container, '.selector').forEach((tabSelector) => {
             tabSelector.addEventListener('click', (e) => {
                 this.activate(e.srcElement);
                 this.focus(e.srcElement);
@@ -64,7 +64,7 @@ class Tabs {
             tabElement = _$(this.container, '#' + hashParams[this.tabsindex])[0];
         } else {
             // Fall back to the first tab.
-            tabElement = _$(this.container, '.tab-selector')[0];
+            tabElement = _$(this.container, '.selector')[0];
         }
         return tabElement;
     }
@@ -90,7 +90,7 @@ class Tabs {
 
         if (tabElement.getAttribute('type') === 'checkbox') {
             // Deactivate all other tabs when this tab is clicked.
-            _$(this.container, '.tab-selector:not(#' + hashParams[this.tabsindex] + ')').forEach((el) => {el.checked = false;});
+            _$(this.container, '.selector:not(#' + hashParams[this.tabsindex] + ')').forEach((el) => {el.checked = false;});
         } else {
             tabElement.checked = true;
         }
@@ -121,7 +121,7 @@ class Tabs {
      */
     tabMode(mediaQueryList) {
         // Accordion mode uses checkboxes, instead of radio buttons.
-        _$(this.container, '.tab-selector').forEach((tabSelector) => {
+        _$(this.container, '.selector').forEach((tabSelector) => {
             tabSelector.setAttribute('type', mediaQueryList.matches ? 'checkbox' : 'radio');
         });
         let tabElement = this.activate();
@@ -134,7 +134,7 @@ class Tabs {
  * Optional Jquery support.
  */
 if (window.$) {
-    $.fn.tabs = function({breakpoint = 480, tabsindex = 0} = {}) {
+    $.fn.tabcordions = function({breakpoint = 480, tabsindex = 0} = {}) {
         var options = $.extend({}, {breakpoint, tabsindex}, this.data());
         options.container = this.get(0);
         new Tabs(options);
