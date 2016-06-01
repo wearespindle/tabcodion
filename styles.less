@@ -1,0 +1,181 @@
+@textColor: '#333';
+@spotcolor: '#e94e1b';
+
+.border-box() {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.no-select() {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.tabs {
+    /** Prevents uncontrolled tab padding */
+    font-size: 0;
+
+    .tab {
+        display: inline;
+        padding-right: 5px;
+
+        .tab-label {
+            border: 1px solid transparent;
+            border-radius: 4px 4px 0px 0px;
+            display: inline-block;
+            padding: 8px 12px;
+            position: relative;
+            vertical-align: bottom;
+            margin-bottom: 0;
+
+            color: @textColor;
+            font-size: 1em;
+            .no-select();
+            outline: 0;
+            font-size: 13px;
+        }
+
+        .tab-selector {
+            clip: rect(0 0 0 0);
+            height: 1px;
+            opacity: 0;
+            position: fixed;
+            width: 1px;
+
+            /** Active tab */
+            &:checked + .tab-label {
+                border: 1px solid #eee;
+                border-bottom: 1px solid white;
+                color: @spotcolor;
+                /** Needed for FF/IE */
+                z-index: 100;
+            }
+
+            /** An inactive tab that's being hovered */
+            &:not(:checked):hover + .tab-label {
+                background: #eee;
+                cursor: pointer;
+                color: @spotcolor;
+            }
+
+            /** Shows the matching tab content. */
+            &:checked ~ .tab-panel {
+                display: inline;
+            }
+        }
+
+        /** The default hidden state for tab content */
+        .tab-panel {
+            display: inline-block;
+            overflow: hidden;
+            height: 0;
+            width: 0;
+
+            .tab-content {
+                .border-box();
+                width: 100%;
+                float: left;
+                padding-top: 20px;
+                margin-top: -1px;
+                background: #fff;
+                border-top: 1px solid #eee;
+                font-size: 0.8rem;
+            }
+        }
+    }
+}
+
+
+/** Accordion mode */
+@media screen and (max-width : 480px) {
+    .tabs {
+        .tab {
+            padding: 0px;
+
+            .tab-label {
+                border: 1px solid #eee;
+                float: left;
+                width: 100%;
+                box-sizing: border-box;
+                margin-bottom: 0px;
+                padding: 10px;
+
+                &:after {
+                    content: "\25be";
+                    text-decoration: inherit;
+                    display: inline-block;
+                    speak: none;
+                    float: right;
+                }
+            }
+
+            .tab-selector {
+                /** Active tab */
+                &:checked + .tab-label {
+                    border: 1px solid #eee;
+                    color: @spotcolor;
+
+                    &:after {
+                        content: "\25b4";
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+                /** Active accordion */
+                &:checked ~ .tab-panel > .tab-content {
+                    max-height: 2048px;
+                    border: 1px solid #eee;
+                    margin-bottom: 10px;
+                }
+
+                /** Shows the matching tab content. */
+                &:checked ~ .tab-panel {
+                    display: inline;
+
+                    border: 1px solid transparent;
+
+                    .tab-content {
+                        padding: 5px;
+
+                        * {
+                            opacity: 1;
+                        }
+                    }
+                }
+
+                /** An inactive tab that's being touched doesn't have hover */
+                &:not(:checked):hover + .tab-label {
+                    background: #fff;
+                    cursor: pointer;
+                    color: @textColor;
+                }
+
+            }
+
+            /** Inactive accordion */
+            .tab-panel {
+                display: inline;
+
+                .tab-content {
+                    overflow: hidden;
+                    max-height: 0;
+                    border: 1px solid transparent;
+                    margin-bottom: 0px;
+
+                    * {
+                        opacity: 0;
+                    }
+                }
+            }
+        }
+    }
+}

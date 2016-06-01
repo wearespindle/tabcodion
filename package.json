@@ -1,0 +1,36 @@
+{
+  "name": "tabcordions",
+  "version": "0.1.0",
+  "description": "A minimal tab plugin that acts as accordions on smaller devices. With optional Jquery support.",
+  "author": "Spindle <hello@wearespindle.com>",
+  "contributors": [
+    {
+      "name": "Jeroen van Veen",
+      "email": "jeroen@wearespindle.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wearespindle/tabcordions"
+  },
+  "bugs": {
+    "url": "https://github.com/wearespindle/tabcordions/issues"
+  },
+  "files": [
+    "index.js",
+    "styles.less"
+  ],
+  "analyze": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "browserify example/index.js | babel --presets es2015 | uglifyjs > example/tabcordion.js; lessc styles.less > example/styles.css",
+    "watch": "watchify example/index.js -o './node_modules/.bin/babel > example/tabcordion.js'"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0"
+  },
+  "dependencies": {
+    "query-string": "^4.2.0"
+  }
+}
