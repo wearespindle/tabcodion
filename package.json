@@ -1,6 +1,6 @@
 {
     "name": "tabcordions",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "A minimal tab plugin that acts as accordions on smaller devices. With optional Jquery support.",
     "author": {
         "name": "Spindle",

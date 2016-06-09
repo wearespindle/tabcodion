@@ -2,6 +2,7 @@
 
 const queryString = require('query-string');
 
+
 /**
  * Simulate basic Jquery selector usage without having to rely on jquery.
  * @param {element} parent - The element to start searching from.
@@ -13,11 +14,10 @@ function _$(parent, selector) {
 }
 
 
-class Tabs {
-
+class Tabcordions {
     /**
-     * Tabs that act as accordions when the browser width is beneath the
-     * breakpoint.
+     * Tabcordions that act as accordions when the browser width is beneath the
+     * breakpoint and as tabs when above.
      * @param {element} container - The tabs element that contains the tabs class.
      * @param {Number} breakpoint - The width in pixels at which tabs becomee accordions.
      * @param {String} tabsindex - A unique id to identify this tabs instance within the location hash..
@@ -144,10 +144,10 @@ if (window.$) {
         var options = $.extend({}, {breakpoint, tabsindex}, this.data());
         options.container = this.get(0);
         if (options.container) {
-            new Tabs(options);
+            new Tabcordions(options);
         }
         return this;
     };
 }
 
-module.exports = Tabs;
+module.exports = Tabcordions;
