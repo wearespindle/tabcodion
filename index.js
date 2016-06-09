@@ -143,7 +143,9 @@ if (window.$) {
     $.fn.tabcordions = function({breakpoint = 480, tabsindex = 0} = {}) {
         var options = $.extend({}, {breakpoint, tabsindex}, this.data());
         options.container = this.get(0);
-        new Tabs(options);
+        if (options.container) {
+            new Tabs(options);
+        }
         return this;
     };
 }
