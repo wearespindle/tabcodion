@@ -1,5 +1,5 @@
-@textColor: '#333';
-@spotcolor: '#e94e1b';
+$textColor: '#333' !default;
+$spotColor: '#e94e1b' !default;
 
 .border-box() {
     -webkit-box-sizing: border-box;
@@ -34,7 +34,7 @@
             vertical-align: bottom;
             margin-bottom: 0;
 
-            color: @textColor;
+            color: $textColor;
             font-size: 1rem;
             .no-select();
             outline: 0;
@@ -52,7 +52,7 @@
             &:checked + .label {
                 border: 1px solid #eee;
                 border-bottom: 1px solid white;
-                color: @spotcolor;
+                color: $spotColor;
                 /** Needed for FF/IE */
                 z-index: 100;
             }
@@ -61,7 +61,7 @@
             &:not(:checked):hover + .label {
                 background: #eee;
                 cursor: pointer;
-                color: @spotcolor;
+                color: $spotColor;
             }
 
             /** Shows the matching tab content. */
@@ -117,10 +117,10 @@
                 /** Active tab */
                 &:checked + label {
                     border: 1px solid #eee;
-                    color: @spotcolor;
+                    color: $spotColor;
 
                     &:after {
-                        content: "\25b4";                        
+                        content: "\25b4";
                     }
 
                     &:hover {
@@ -154,7 +154,7 @@
                 &:not(:checked):hover + .label {
                     background: #fff;
                     cursor: pointer;
-                    color: @textColor;
+                    color: $textColor;
                 }
 
             }
