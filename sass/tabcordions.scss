@@ -1,24 +1,8 @@
-$textColor: '#333' !default;
-$spotColor: '#e94e1b' !default;
-
-@mixin border-box() {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-@mixin no-select() {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+@import "./variables";
 
 
 .tabcordions {
-    /** Prevents uncontrolled tab padding */
+    // Prevents uncontrolled tab padding.
     font-size: 0;
 
     .tabcordion {
@@ -26,17 +10,15 @@ $spotColor: '#e94e1b' !default;
         padding-right: 5px;
 
         .label {
+            @include no-select;
             border: 1px solid transparent;
-            border-radius: 4px 4px 0px 0px;
+            border-radius: 4px 4px 0 0;
             display: inline-block;
             padding: 8px 12px;
             position: relative;
             vertical-align: bottom;
             margin-bottom: 0;
-
-            color: $textColor;
-            font-size: 1rem;
-            @include no-select();
+            color: $tabcordions-text-color;
             outline: 0;
             font-size: 13px;
         }
@@ -48,29 +30,29 @@ $spotColor: '#e94e1b' !default;
             position: fixed;
             width: 1px;
 
-            /** Active tab */
+            // Active tab.
             &:checked + .label {
                 border: 1px solid #eee;
-                border-bottom: 1px solid white;
-                color: $spotColor;
-                /** Needed for FF/IE */
+                border-bottom: 1px solid #fff;
+                color: $tabcordions-spot-color;
+                // Needed for FF/IE.
                 z-index: 100;
             }
 
-            /** An inactive tab that's being hovered */
+            // An inactive tab that's being hovered.
             &:not(:checked):hover + .label {
                 background: #eee;
                 cursor: pointer;
-                color: $spotColor;
+                color: $tabcordions-spot-color;
             }
 
-            /** Shows the matching tab content. */
+            // Shows the matching tab content.
             &:checked ~ .panel {
                 display: inline;
             }
         }
 
-        /** The default hidden state for tab content */
+        // The default hidden state for tab content.
         .panel {
             display: inline-block;
             overflow: hidden;
@@ -78,7 +60,7 @@ $spotColor: '#e94e1b' !default;
             width: 0;
 
             .content {
-                @include border-box();
+                @include border-box;
                 width: 100%;
                 float: left;
                 padding-top: 20px;
@@ -90,17 +72,17 @@ $spotColor: '#e94e1b' !default;
         }
     }
 
-    /** Accordion-specific styling */
+    // Accordion-specific styling.
     &.accordion {
         .tabcordion {
-            padding: 0px;
+            padding: 0;
 
             .label {
+                @include border-box;
                 border: 1px solid #eee;
                 float: left;
                 width: 100%;
-                @include border-box();
-                margin-bottom: 0px;
+                margin-bottom: 0;
                 padding: 10px;
 
                 &:after {
@@ -114,10 +96,10 @@ $spotColor: '#e94e1b' !default;
             }
 
             .selector {
-                /** Active tab */
+                // Active tab.
                 &:checked + label {
                     border: 1px solid #eee;
-                    color: $spotColor;
+                    color: $tabcordions-spot-color;
 
                     &:after {
                         content: "\25b4";
@@ -128,14 +110,14 @@ $spotColor: '#e94e1b' !default;
                     }
                 }
 
-                /** Active accordion */
+                // Active accordion.
                 &:checked ~ .panel > .content {
                     max-height: 2048px;
                     border: 1px solid #eee;
                     margin-bottom: 10px;
                 }
 
-                /** Shows the matching tab content. */
+                // Shows the matching tab content.
                 &:checked ~ .panel {
                     display: inline;
 
@@ -150,16 +132,16 @@ $spotColor: '#e94e1b' !default;
                     }
                 }
 
-                /** An inactive tab that's being touched doesn't have hover */
+                // An inactive tab that's being touched doesn't have hover.
                 &:not(:checked):hover + .label {
                     background: #fff;
                     cursor: pointer;
-                    color: $textColor;
+                    color: $tabcordions-text-color;
                 }
 
             }
 
-            /** Inactive accordion */
+            // Inactive accordion.
             .panel {
                 display: inline;
 
@@ -167,7 +149,7 @@ $spotColor: '#e94e1b' !default;
                     overflow: hidden;
                     max-height: 0;
                     border: 1px solid transparent;
-                    margin-bottom: 0px;
+                    margin-bottom: 0;
 
                     * {
                         opacity: 0;
