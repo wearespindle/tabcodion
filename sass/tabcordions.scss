@@ -32,7 +32,7 @@
 
             // Active tab.
             &:checked + .label {
-                border: 1px solid #eee;
+                border: 1px solid #ddd;
                 border-bottom: 1px solid #fff;
                 color: $tabcordions-spot-color;
                 // Needed for FF/IE.
@@ -98,7 +98,7 @@
             .selector {
                 // Active tab.
                 &:checked + label {
-                    border: 1px solid #eee;
+                    border: 1px solid #ddd;
                     color: $tabcordions-spot-color;
 
                     &:after {
@@ -113,7 +113,7 @@
                 // Active accordion.
                 &:checked ~ .panel > .content {
                     max-height: 2048px;
-                    border: 1px solid #eee;
+                    border: 1px solid #ddd;
                     margin-bottom: 10px;
                 }
 
