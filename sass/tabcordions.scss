@@ -44,6 +44,7 @@
                 background: #eee;
                 cursor: pointer;
                 color: $tabcordions-spot-color;
+                border-bottom: 1px solid #ddd;
             }
 
             // Shows the matching tab content.
@@ -66,7 +67,7 @@
                 padding-top: 20px;
                 margin-top: -1px;
                 background: #fff;
-                border-top: 1px solid #eee;
+                border-top: 1px solid #ddd;
                 font-size: 0.8rem;
             }
         }
@@ -79,7 +80,7 @@
 
             .label {
                 @include border-box;
-                border: 1px solid #eee;
+                border: 1px solid #ddd;
                 float: left;
                 width: 100%;
                 margin-bottom: 0;
