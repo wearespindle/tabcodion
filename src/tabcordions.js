@@ -24,7 +24,7 @@ class Tabcordions {
      */
     constructor({container, breakpoint = 480, tabsindex = 0} = {}) {
         this.container = container;
-        this.mediaQueryList = window.matchMedia('(max-width: ' + breakpoint + 'px)');
+        this.mediaQueryList = window.matchMedia(`(max-width: ${breakpoint}px)`);
         this.tabsindex = `tc${tabsindex}`;
 
         this.isIos = navigator.userAgent.match(/(iPod|iPhone|iPad)/) ? true : false;
@@ -37,8 +37,8 @@ class Tabcordions {
         this.mediaQueryList.addListener(this.tabMode.bind(this));
         _$(this.container, '.selector').forEach((tabSelector) => {
             tabSelector.addEventListener('click', (e) => {
-                this.activate(e.srcElement);
-                this.focus(e.srcElement);
+                this.activate(e.target);
+                this.focus(e.target);
             });
         });
 
@@ -58,7 +58,7 @@ class Tabcordions {
         let hashParams = queryString.parse(location.hash.replace('#', ''));
         // Try to get the active tab from the location hash first.
         if ((this.tabsindex in hashParams)) {
-            tabElement = _$(this.container, '#' + hashParams[this.tabsindex])[0];
+            tabElement = _$(this.container, `#${hashParams[this.tabsindex]}`)[0];
         } else {
             // Fall back to the first tab.
             tabElement = _$(this.container, '.selector')[0];
@@ -87,7 +87,9 @@ class Tabcordions {
 
         if (tabElement.getAttribute('type') === 'checkbox') {
             // Deactivate all other tabs when this tab is clicked.
-            _$(this.container, '.selector:not(#' + hashParams[this.tabsindex] + ')').forEach((el) => {el.checked = false;});
+            _$(this.container, `.selector:not(#${hashParams[this.tabsindex]})`).forEach((el) => {
+                el.checked = false;
+            });
         } else {
             tabElement.checked = true;
         }
@@ -102,7 +104,9 @@ class Tabcordions {
      * @param {element} tabElement - The tab selector element.
      */
     focus(tabElement) {
-        tabElement ? tabElement : this.activeTabElement();
+        if (!tabElement) {
+            tabElement = this.activeTabElement();
+        }
         // In tab mode, focus is not desirable for non-touch devices.
         if ((tabElement.getAttribute('type') === 'radio') && !(this.isIos || this.isAndroid)) return;
         // Give the browser some space to figure out the correct scroll height.
@@ -126,7 +130,7 @@ class Tabcordions {
             tabSelector.setAttribute('type', mediaQueryList.matches ? 'checkbox' : 'radio');
         });
         let tabElement = this.activate();
-        if(mediaQueryList.matches) {
+        if (mediaQueryList.matches) {
             this.container.className = this.container.className + ' accordion';
         } else {
             this.container.className = this.container.className.replace(' accordion', '');
