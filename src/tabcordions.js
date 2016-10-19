@@ -45,8 +45,20 @@ class Tabcordions {
         window.onload = (e) => {
             this.focus(this.activeTabElement());
         };
-    }
 
+        // When the popstate event is triggered, use the activate method
+        // to properly set the right tab. This enables updating the right tab
+        // if a user uses the next and previous browser buttons.
+        window.onpopstate = () => {
+            // Firefox prevents using the backbutton after the hash gets removed
+            // and wants to go back to a previous page. Disabling this on FF
+            // means FF users just go back to the previous page completely
+            // instead of switching previous tabs.
+            if (navigator.userAgent.toLowerCase().indexOf('firefox') === -1) {
+                this.activate();
+            }
+        };
+    }
 
     /**
      * Find the active tab element from the current hash or fall back to
